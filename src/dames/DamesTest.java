@@ -1,4 +1,5 @@
 package dames;
+import Display.DisplayFrame;
 import dames.util.*;
 
 /**
@@ -19,5 +20,6 @@ public class DamesTest {
         assert(damier.getCase(7, 1).getPiece().getCouleur() == Couleur.Black);
         
         System.out.println("Test Successful, no assertion trigged");
+        DisplayFrame f = new DisplayFrame();
     }
 }
