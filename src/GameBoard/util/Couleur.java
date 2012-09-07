@@ -1,4 +1,4 @@
-package dames.util;
+package GameBoard.util;
 
 public enum Couleur
 {

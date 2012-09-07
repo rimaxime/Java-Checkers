@@ -1,5 +1,5 @@
-package dames;
-import dames.util.*;
+package GameBoard;
+import GameBoard.util.Position;
 import java.util.Objects;
 
 /**

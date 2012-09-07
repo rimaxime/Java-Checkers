@@ -1,5 +1,7 @@
-package dames;
-import dames.util.*;
+package GameBoard;
+import GameBoard.util.Type;
+import GameBoard.util.Position;
+import GameBoard.util.Couleur;
 
 /**
  *

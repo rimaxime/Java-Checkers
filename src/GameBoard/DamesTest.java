@@ -1,6 +1,6 @@
-package dames;
+package GameBoard;
+import GameBoard.util.Couleur;
 import Display.DisplayFrame;
-import dames.util.*;
 
 /**
  *

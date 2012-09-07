@@ -4,7 +4,7 @@
  */
 package Display;
 
-import dames.Damier;
+import GameBoard.Damier;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
