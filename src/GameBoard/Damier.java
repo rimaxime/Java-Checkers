@@ -33,7 +33,8 @@ public class Damier {
                 {
                     if ((ligne % 2 == 0 && colonne % 2 == 1) || (ligne % 2 == 1 && colonne % 2 == 0))
                     {
-                        System.out.println(ligne + " " + colonne);
+                        //DEBUG
+                        //System.out.println(ligne + " " + colonne);
                         Piece piece = new Piece(Couleur.White);
                         current_case.setPiece(piece);
                     }

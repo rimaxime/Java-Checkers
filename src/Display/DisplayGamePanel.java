@@ -4,6 +4,7 @@
  */
 package Display;
 
+import GameBoard.Case;
 import GameBoard.util.Couleur;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,18 +15,25 @@ import javax.swing.JPanel;
  * @author Asus
  */
 public class DisplayGamePanel extends JPanel{
-    DisplayFrame parent;
+    private DisplayFrame parent;
+    private boolean mouseClicked = false;
+    private int posX = 0;
+    private int posY = 0;
+    private Case previousSelectedCase = null;
+    private Case selectedCase = null;
     
     public DisplayGamePanel(DisplayFrame parent, int height, int widht) {
         this.parent = parent;
         this.setSize(widht, height);
         this.setBackground(Color.BLACK);
+        selectedCase = null;
         this.setVisible(false);
     }
 
     DisplayGamePanel(DisplayFrame parent) {
         this.parent = parent;
         this.setSize(parent.getBoxsize()*50 ,parent.getBoxsize()*50 );
+        selectedCase = null;
         this.setBackground(Color.BLACK);
         this.setVisible(false);
     }
@@ -64,8 +72,30 @@ public class DisplayGamePanel extends JPanel{
             if(parent.getBoxsize() % 2 == 0) {
                 pair =! pair;
             }
-        }
-        
-        
+            
+        }      
      }
+
+    public void setMousePressed(boolean mousePressed) {
+        this.mouseClicked = mousePressed;
+    }
+
+    void setX(int x) {
+        this.posX = x;
+    }
+
+    void setY(int y) {
+        this.posY = y;
+    }
+
+    public void listenMouse() {
+        previousSelectedCase = selectedCase;
+        selectedCase = parent.currentGameboard.getCase(posY, posX);
+        if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()))
+        {
+            System.out.println("On bouge");
+            parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
+        }
+
+    }
 }
