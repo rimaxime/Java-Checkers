@@ -4,8 +4,11 @@
  */
 package Display;
 
+import Game.GameControler;
 import GameBoard.Case;
 import GameBoard.util.Couleur;
+import GameBoard.util.Type;
+import GameBoard.util.Winner;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -21,12 +24,14 @@ public class DisplayGamePanel extends JPanel{
     private int posY = 0;
     private Case previousSelectedCase = null;
     private Case selectedCase = null;
+    private GameControler gameControl = null;
     
     public DisplayGamePanel(DisplayFrame parent, int height, int widht) {
         this.parent = parent;
         this.setSize(widht, height);
         this.setBackground(Color.BLACK);
         selectedCase = null;
+        gameControl = new GameControler(parent.currentGameboard);
         this.setVisible(false);
     }
 
@@ -34,6 +39,7 @@ public class DisplayGamePanel extends JPanel{
         this.parent = parent;
         this.setSize(parent.getBoxsize()*50 ,parent.getBoxsize()*50 );
         selectedCase = null;
+        gameControl = new GameControler(parent.currentGameboard);
         this.setBackground(Color.BLACK);
         this.setVisible(false);
     }
@@ -71,10 +77,24 @@ public class DisplayGamePanel extends JPanel{
                 g.fillRect(i*50+50,j*50+50, 50, 50);
                 if(parent.currentGameboard.getCase(j,i).getPiece() != null)
                     {
-                        if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black)
-                            g.setColor(Color.BLACK);
+                        if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black){
+                            if(parent.currentGameboard.getCase(j,i).getPiece().getType() == Type.Dame)
+                            {
+                               g.setColor(Color.red);     
+                            }   
+                            else
+                                g.setColor(Color.BLACK);
+                        }
                         else
-                            g.setColor(Color.WHITE);
+                        {
+                            if(parent.currentGameboard.getCase(j,i).getPiece().getType() == Type.Dame)
+                            {
+                               g.setColor(Color.pink);     
+                            }
+                            else
+                                g.setColor(Color.WHITE);
+                        }
+                         
                         g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
                     }
             }
@@ -99,14 +119,30 @@ public class DisplayGamePanel extends JPanel{
 
     public void listenMouse() {
         previousSelectedCase = selectedCase;
-        selectedCase = parent.currentGameboard.getCase(posY, posX);
-        if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()))
+        if(posY < parent.getBoxsize() && posX < parent.getBoxsize())
+            selectedCase = parent.currentGameboard.getCase(posY, posX);
+        if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()) &&
+                previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer())
         {
             System.out.println("On bouge");
             parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
-            previousSelectedCase = null;
-            selectedCase = null;
-        }
+                if(gameControl.getCurrentPlayer() == Couleur.White){
+                    gameControl.setCurrentPlayer(Couleur.Black);   
+                    parent.activePlayer.setText("Player Black to play");
+                }
 
+                else{
+                    gameControl.setCurrentPlayer(Couleur.White);
+                    parent.activePlayer.setText("Player White to play");
+                }
+                previousSelectedCase = null;
+                selectedCase = null;
+                
+        }
+        if(gameControl.detectWinner() != Winner.No)
+        {
+            parent.activePlayer.setText(gameControl.detectWinner() + " Won !!! ");
+            
+        }
     }
 }

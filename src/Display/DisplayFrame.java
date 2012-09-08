@@ -7,11 +7,13 @@ package Display;
 import Game.GameThread;
 import GameBoard.Damier;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -27,6 +29,7 @@ public class DisplayFrame extends JFrame {
     private int oldY = -1;
     private DisplayMainMenu displaymainmenu;
     private DisplayGamePanel displayP;
+    protected JLabel activePlayer;
     protected GameThread anim;
     protected boolean animState;
     private int t = 10;
@@ -52,17 +55,18 @@ public class DisplayFrame extends JFrame {
         this.setSize(boxsize * 50 + 100, boxsize * 50 + 150);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        CreatePartyComponent();
         initAllPanel();
         this.setLayout(new BorderLayout());
         this.getContentPane().add(displaymainmenu, BorderLayout.CENTER);
-        CreatePartyComponent();
+        
         this.setVisible(true);
     }
 
     private final void initAllPanel() {
         displaymainmenu = new DisplayMainMenu(this);
         displayP = new DisplayGamePanel(this);
-
+        activePlayer = new JLabel();
 
         mouseListen = new MouseListener() {
             @Override
@@ -73,7 +77,7 @@ public class DisplayFrame extends JFrame {
             public void mousePressed(MouseEvent e) {
                 int x = (int) ((e.getX() - 100.0) / 50 + 1);
                 int y = (int) ((e.getY() - 100.0) / 50 + 1);
-                if ((x != oldX || y != oldY) && x >= 0 && y >= 0 && x < boxsize && y < boxsize) {
+                //if ((x != oldX || y != oldY) && x >= 0 && y >= 0 && x < boxsize && y < boxsize) {
                     System.out.println("Mouse Pressed " + x + ";" + y);
                     displayP.setMousePressed(true);
                     displayP.setX(x);
@@ -81,7 +85,7 @@ public class DisplayFrame extends JFrame {
                     oldX = x;
                     oldY = y;
                     displayP.listenMouse();
-                }
+                //}
             }
 
             @Override
@@ -125,6 +129,10 @@ public class DisplayFrame extends JFrame {
                 break;
             case 1:
                 this.getContentPane().add(displayP, BorderLayout.CENTER);
+                this.getContentPane().add(activePlayer,BorderLayout.SOUTH);
+                activePlayer.setForeground(Color.red);
+                activePlayer.setText("It's White To play");
+                
                 //a bouger par la suite
                 ConfigureListener();
                 if (anim != null && anim.isAlive()) {
@@ -138,6 +146,7 @@ public class DisplayFrame extends JFrame {
                 anim = new GameThread(this);
                 anim.start();
                 displayP.setVisible(true);
+                activePlayer.setVisible(true);
                 break;
         }
         old_panel = panel;
