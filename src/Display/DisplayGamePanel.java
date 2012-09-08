@@ -54,20 +54,29 @@ public class DisplayGamePanel extends JPanel{
         {
             for(int j=0;j<parent.getBoxsize();j++)
             {
-                if(pair)
-                    g.setColor(Color.darkGray);
+                if(selectedCase != null && selectedCase.getPosition().getX() == j && selectedCase.getPosition().getY() == i)
+                {
+                    g.setColor(Color.orange);
+                    
+                }
                 else
-                    g.setColor(Color.lightGray);
-                pair=!pair;
+                {
+                    if(pair)
+                        g.setColor(Color.darkGray);
+                    else
+                        g.setColor(Color.lightGray);
+                    
+                }
+                pair=!pair;  
                 g.fillRect(i*50+50,j*50+50, 50, 50);
                 if(parent.currentGameboard.getCase(j,i).getPiece() != null)
-                {
-                    if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black)
-                        g.setColor(Color.BLACK);
-                    else
-                        g.setColor(Color.WHITE);
-                    g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
-                }
+                    {
+                        if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black)
+                            g.setColor(Color.BLACK);
+                        else
+                            g.setColor(Color.WHITE);
+                        g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
+                    }
             }
             if(parent.getBoxsize() % 2 == 0) {
                 pair =! pair;
@@ -95,6 +104,8 @@ public class DisplayGamePanel extends JPanel{
         {
             System.out.println("On bouge");
             parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
+            previousSelectedCase = null;
+            selectedCase = null;
         }
 
     }
