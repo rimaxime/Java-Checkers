@@ -12,7 +12,6 @@ public class Damier {
     public Damier(int taille)
     {
         assert (taille > 0);
-        
         this.lesCases = new Case[taille][taille];
     }
     
@@ -32,15 +31,16 @@ public class Damier {
                 Case current_case = this.lesCases[ligne][colonne];
                 if (ligne < (taille /2 - 1))
                 {
-                    if ((ligne % 2 == 0 && colonne % 2 == 0) || (ligne % 2 == 1 && colonne % 2 == 1))
+                    if ((ligne % 2 == 0 && colonne % 2 == 1) || (ligne % 2 == 1 && colonne % 2 == 0))
                     {
+                        System.out.println(ligne + " " + colonne);
                         Piece piece = new Piece(Couleur.White);
                         current_case.setPiece(piece);
                     }
                 }
-                else if (ligne > (taille / 2 + 1))
+                else if (ligne >= (taille / 2 + 1))
                 {
-                    if ((ligne % 2 == 0 && colonne % 2 == 0) || (ligne % 2 == 1 && colonne % 2 == 1))
+                    if ((ligne % 2 == 0 && colonne % 2 == 1) || (ligne % 2 == 1 && colonne % 2 == 0))
                     {
                         Piece piece = new Piece(Couleur.Black);
                         current_case.setPiece(piece);

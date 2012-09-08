@@ -4,6 +4,7 @@
  */
 package Display;
 
+import GameBoard.util.Couleur;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -46,11 +47,19 @@ public class DisplayGamePanel extends JPanel{
             for(int j=0;j<parent.getBoxsize();j++)
             {
                 if(pair)
-                    g.setColor(Color.GRAY);
+                    g.setColor(Color.darkGray);
                 else
-                    g.setColor(Color.MAGENTA);
+                    g.setColor(Color.lightGray);
                 pair=!pair;
                 g.fillRect(i*50+50,j*50+50, 50, 50);
+                if(parent.currentGameboard.getCase(j,i).getPiece() != null)
+                {
+                    if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black)
+                        g.setColor(Color.BLACK);
+                    else
+                        g.setColor(Color.WHITE);
+                    g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
+                }
             }
             if(parent.getBoxsize() % 2 == 0) {
                 pair =! pair;

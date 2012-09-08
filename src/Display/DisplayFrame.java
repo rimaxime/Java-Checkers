@@ -13,8 +13,8 @@ import javax.swing.JFrame;
  * @author Asus
  */
 public class DisplayFrame extends JFrame{
-    private int boxsize = 9;
-    private Damier currentGameboard;
+    private int boxsize = 10;
+    protected Damier currentGameboard;
     private int old_panel = 0;
     private DisplayMainMenu displaymainmenu;
     private DisplayGamePanel displayP;
@@ -43,6 +43,7 @@ public class DisplayFrame extends JFrame{
         initAllPanel();
         this.setLayout(new BorderLayout());
         this.getContentPane().add(displaymainmenu, BorderLayout.CENTER);
+        CreatePartyComponent();
         this.setVisible(true);
     }
     
@@ -55,6 +56,7 @@ public class DisplayFrame extends JFrame{
     private void CreatePartyComponent()
     {
         currentGameboard = new Damier(boxsize);
+        currentGameboard.initialise();
     }
 
     public void changePanel(int panel) {
