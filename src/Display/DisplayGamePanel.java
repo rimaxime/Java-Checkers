@@ -126,6 +126,10 @@ public class DisplayGamePanel extends JPanel{
         {
             System.out.println("On bouge");
             parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
+            //gerer une liste des cases prises lors de ce mouvement. -- nécéssaire de garder cette liste affichée.
+            //envoyer la liste en parametres
+            //récupérer la possibilité ou non de faire un mouvement de plus.
+            if(!parent.currentGameboard.oneMoreMouvementPossible()){
                 if(gameControl.getCurrentPlayer() == Couleur.White){
                     gameControl.setCurrentPlayer(Couleur.Black);   
                     parent.activePlayer.setText("Player Black to play");
@@ -137,6 +141,7 @@ public class DisplayGamePanel extends JPanel{
                 }
                 previousSelectedCase = null;
                 selectedCase = null;
+            }
                 
         }
         if(gameControl.detectWinner() != Winner.No)
