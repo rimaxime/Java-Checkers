@@ -183,9 +183,12 @@ public class DisplayGamePanel extends JPanel{
     }
 
     private boolean eatenPiece() {
-        if(previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == 2 || 
+        /*if(selectedCase.getPiece().getType() == Type.Pion && previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == 2 || 
                 previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == -2) {
             System.out.println("EatenPiece");
+            return true;
+        }*/
+        if(listePositions != null) {
             return true;
         }
         else {
