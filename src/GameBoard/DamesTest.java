@@ -1,6 +1,6 @@
 package GameBoard;
-import GameBoard.util.Couleur;
 import Display.DisplayFrame;
+import GameBoard.util.Couleur;
 
 /**
  *

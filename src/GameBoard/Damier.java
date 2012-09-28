@@ -171,6 +171,10 @@ public class Damier {
                 if (PionMoreMouvementPossible(selectedCase, listePositions, currentColor)) {
                     return_state = true;
                 }
+                else
+                {
+                    System.out.println("Not more pieces eaten");
+                }
                 break;
 
 
@@ -180,38 +184,55 @@ public class Damier {
     }
 
     private boolean PionMoreMouvementPossible(Case selectedCase, ArrayList<Position> listePositions, Couleur currentColor) {
-        boolean return_state = true;
+        boolean return_state = false;
         if ((selectedCase.getPosition().getX() + 2 < taille) && (selectedCase.getPosition().getY() + 2 < taille)
                 && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() + 2, selectedCase.getPosition().getY() + 2).getPosition()))) {
+            System.out.println("test1");
+            return_state = true;
             for (Position p : listePositions) {
                 if (p.getX() == selectedCase.getPosition().getX() + 2 && p.getY() == selectedCase.getPosition().getY() + 2) {
                     return_state = false;
                 }
             }
+            if(return_state)
+                return return_state;
         }
-        if ((selectedCase.getPosition().getX() + 2 < taille) && (selectedCase.getPosition().getY() - 2 > taille)
+        if ((selectedCase.getPosition().getX() + 2 < taille) && (selectedCase.getPosition().getY() - 2 > 0)
                 && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() + 2, selectedCase.getPosition().getY() - 2).getPosition()))) {
+            return_state = true;
             for (Position p : listePositions) {
                 if (p.getX() == selectedCase.getPosition().getX() + 2 && p.getY() == selectedCase.getPosition().getY() - 2) {
                     return_state = false;
                 }
             }
+            System.out.println(return_state);
+            if(return_state)
+                return return_state;
         }
-        if ((selectedCase.getPosition().getX() - 2 > taille) && (selectedCase.getPosition().getY() + 2 < taille)
+        if ((selectedCase.getPosition().getX() - 2 > 0) && (selectedCase.getPosition().getY() + 2 < taille)
                 && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() - 2, selectedCase.getPosition().getY() + 2).getPosition()))) {
+            return_state = true;
+            System.out.println("test3");
             for (Position p : listePositions) {
+                
                 if (p.getX() == selectedCase.getPosition().getX() - 2 && p.getY() == selectedCase.getPosition().getY() + 2) {
                     return_state = false;
                 }
             }
+            if(return_state)
+                return return_state;
         }
-        if ((selectedCase.getPosition().getX() - 2 > taille) && (selectedCase.getPosition().getY() - 2 > taille)
+        if ((selectedCase.getPosition().getX() - 2 > 0) && (selectedCase.getPosition().getY() - 2 > 0)
                 && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() - 2, selectedCase.getPosition().getY() - 2).getPosition()))) {
+            return_state = true;
+            System.out.println("test4");
             for (Position p : listePositions) {
                 if (p.getX() == selectedCase.getPosition().getX() - 2 && p.getY() == selectedCase.getPosition().getY() - 2) {
                     return_state = false;
                 }
             }
+            if(return_state)
+                return return_state;
         }
         return return_state;
     }

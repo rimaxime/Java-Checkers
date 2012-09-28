@@ -44,6 +44,7 @@ public class DisplayGamePanel extends JPanel{
         this.setSize(parent.getBoxsize()*50 ,parent.getBoxsize()*50 );
         selectedCase = null;
         gameControl = new GameControler(parent.currentGameboard);
+        listePositions = new ArrayList<>();
         this.setBackground(Color.BLACK);
         this.setVisible(false);
     }
@@ -79,21 +80,24 @@ public class DisplayGamePanel extends JPanel{
                     }
                     
                 }
-                for(Position p : listePositions)
-                {
-                    if(p.getX() == j && p.getY() == i)
-                    {
-                        if(gameControl.getCurrentPlayer() == Couleur.Black)
-                        {
-                            g.setColor(Color.WHITE);
-                        }
-                        else
-                            g.setColor(Color.BLACK);
-                        g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
-                    }
-                }
                 pair=!pair;  
                 g.fillRect(i*50+50,j*50+50, 50, 50);
+                if(listePositions != null){
+                    for(Position p : listePositions)
+                    {
+                        if(p.getX() == j && p.getY() == i)
+                        {
+                            if(gameControl.getCurrentPlayer() == Couleur.Black)
+                            {
+                                g.setColor(Color.WHITE);
+                            }
+                            else {
+                                g.setColor(Color.BLACK);
+                            }
+                            g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
+                        }
+                    }
+                }
                 if(parent.currentGameboard.getCase(j,i).getPiece() != null)
                     {
                         if(parent.currentGameboard.getCase(j,i).getPiece().getCouleur() == Couleur.Black){
@@ -140,20 +144,22 @@ public class DisplayGamePanel extends JPanel{
 
     public void listenMouse() {
         previousSelectedCase = selectedCase;
-        if(posY < parent.getBoxsize() && posX < parent.getBoxsize())
+        if(posY < parent.getBoxsize() && posX < parent.getBoxsize()) {
             selectedCase = parent.currentGameboard.getCase(posY, posX);
+        }
         if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()) &&
                 previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer())
         {
             System.out.println("On bouge");
             Position p = parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
-            if (p!= null)
+            if (p!= null) {
                 listePositions.add(p);
+            }
                     
             //gerer une liste des cases prises lors de ce mouvement. -- nécéssaire de garder cette liste affichée.
             //envoyer la liste en parametres
             //récupérer la possibilité ou non de faire un mouvement de plus.
-            if(!parent.currentGameboard.oneMoreMouvementPossible(selectedCase,listePositions,gameControl.getCurrentPlayer())){
+            if(!eatenPiece() || !parent.currentGameboard.oneMoreMouvementPossible(selectedCase,listePositions,gameControl.getCurrentPlayer())){
                 listePositions.clear();
                 if(gameControl.getCurrentPlayer() == Couleur.White){
                     gameControl.setCurrentPlayer(Couleur.Black);   
@@ -173,6 +179,17 @@ public class DisplayGamePanel extends JPanel{
         {
             parent.activePlayer.setText(gameControl.detectWinner() + " Won !!! ");
             
+        }
+    }
+
+    private boolean eatenPiece() {
+        if(previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == 2 || 
+                previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == -2) {
+            System.out.println("EatenPiece");
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
