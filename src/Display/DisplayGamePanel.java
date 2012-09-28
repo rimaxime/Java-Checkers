@@ -7,10 +7,12 @@ package Display;
 import Game.GameControler;
 import GameBoard.Case;
 import GameBoard.util.Couleur;
+import GameBoard.util.Position;
 import GameBoard.util.Type;
 import GameBoard.util.Winner;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +27,7 @@ public class DisplayGamePanel extends JPanel{
     private Case previousSelectedCase = null;
     private Case selectedCase = null;
     private GameControler gameControl = null;
+    private ArrayList<Position> listePositions = null;
     
     public DisplayGamePanel(DisplayFrame parent, int height, int widht) {
         this.parent = parent;
@@ -32,6 +35,7 @@ public class DisplayGamePanel extends JPanel{
         this.setBackground(Color.BLACK);
         selectedCase = null;
         gameControl = new GameControler(parent.currentGameboard);
+        listePositions = new ArrayList<>();
         this.setVisible(false);
     }
 
@@ -93,7 +97,7 @@ public class DisplayGamePanel extends JPanel{
                             }
                             else
                                 g.setColor(Color.WHITE);
-                        }
+                        }                         
                          
                         g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
                     }
@@ -125,11 +129,15 @@ public class DisplayGamePanel extends JPanel{
                 previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer())
         {
             System.out.println("On bouge");
-            parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
+            Position p = parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
+            if (p!= null)
+                listePositions.add(p);
+                    
             //gerer une liste des cases prises lors de ce mouvement. -- nécéssaire de garder cette liste affichée.
             //envoyer la liste en parametres
             //récupérer la possibilité ou non de faire un mouvement de plus.
-            if(!parent.currentGameboard.oneMoreMouvementPossible()){
+            if(!parent.currentGameboard.oneMoreMouvementPossible(selectedCase,listePositions,gameControl.getCurrentPlayer())){
+                listePositions.clear();
                 if(gameControl.getCurrentPlayer() == Couleur.White){
                     gameControl.setCurrentPlayer(Couleur.Black);   
                     parent.activePlayer.setText("Player Black to play");
