@@ -5,9 +5,6 @@ import GameBoard.util.Position;
 import GameBoard.util.Couleur;
 import java.util.ArrayList;
 
-/**
- *
- */
 public class Damier {
 
     private Case[][] lesCases;
@@ -171,12 +168,51 @@ public class Damier {
             case Dame:
                 break;
             case Pion:
-                if(mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX(), selectedCase.getPosition().getY()).getPosition()))
+                if (PionMoreMouvementPossible(selectedCase, listePositions, currentColor)) {
+                    return_state = true;
+                }
                 break;
 
 
         }
 
+        return return_state;
+    }
+
+    private boolean PionMoreMouvementPossible(Case selectedCase, ArrayList<Position> listePositions, Couleur currentColor) {
+        boolean return_state = true;
+        if ((selectedCase.getPosition().getX() + 2 < taille) && (selectedCase.getPosition().getY() + 2 < taille)
+                && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() + 2, selectedCase.getPosition().getY() + 2).getPosition()))) {
+            for (Position p : listePositions) {
+                if (p.getX() == selectedCase.getPosition().getX() + 2 && p.getY() == selectedCase.getPosition().getY() + 2) {
+                    return_state = false;
+                }
+            }
+        }
+        if ((selectedCase.getPosition().getX() + 2 < taille) && (selectedCase.getPosition().getY() - 2 > taille)
+                && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() + 2, selectedCase.getPosition().getY() - 2).getPosition()))) {
+            for (Position p : listePositions) {
+                if (p.getX() == selectedCase.getPosition().getX() + 2 && p.getY() == selectedCase.getPosition().getY() - 2) {
+                    return_state = false;
+                }
+            }
+        }
+        if ((selectedCase.getPosition().getX() - 2 > taille) && (selectedCase.getPosition().getY() + 2 < taille)
+                && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() - 2, selectedCase.getPosition().getY() + 2).getPosition()))) {
+            for (Position p : listePositions) {
+                if (p.getX() == selectedCase.getPosition().getX() - 2 && p.getY() == selectedCase.getPosition().getY() + 2) {
+                    return_state = false;
+                }
+            }
+        }
+        if ((selectedCase.getPosition().getX() - 2 > taille) && (selectedCase.getPosition().getY() - 2 > taille)
+                && (mouvementPossible(selectedCase.getPosition(), this.getCase(selectedCase.getPosition().getX() - 2, selectedCase.getPosition().getY() - 2).getPosition()))) {
+            for (Position p : listePositions) {
+                if (p.getX() == selectedCase.getPosition().getX() - 2 && p.getY() == selectedCase.getPosition().getY() - 2) {
+                    return_state = false;
+                }
+            }
+        }
         return return_state;
     }
 }

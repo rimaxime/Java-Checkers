@@ -71,11 +71,26 @@ public class DisplayGamePanel extends JPanel{
                 }
                 else
                 {
-                    if(pair)
+                    if(pair) {
                         g.setColor(Color.darkGray);
-                    else
+                    }
+                    else {
                         g.setColor(Color.lightGray);
+                    }
                     
+                }
+                for(Position p : listePositions)
+                {
+                    if(p.getX() == j && p.getY() == i)
+                    {
+                        if(gameControl.getCurrentPlayer() == Couleur.Black)
+                        {
+                            g.setColor(Color.WHITE);
+                        }
+                        else
+                            g.setColor(Color.BLACK);
+                        g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
+                    }
                 }
                 pair=!pair;  
                 g.fillRect(i*50+50,j*50+50, 50, 50);
@@ -86,8 +101,9 @@ public class DisplayGamePanel extends JPanel{
                             {
                                g.setColor(Color.red);     
                             }   
-                            else
+                            else {
                                 g.setColor(Color.BLACK);
+                            }
                         }
                         else
                         {
@@ -95,8 +111,9 @@ public class DisplayGamePanel extends JPanel{
                             {
                                g.setColor(Color.pink);     
                             }
-                            else
+                            else {
                                 g.setColor(Color.WHITE);
+                            }
                         }                         
                          
                         g.fillOval(i*50+ 60, j*50 + 60, 25, 25);
