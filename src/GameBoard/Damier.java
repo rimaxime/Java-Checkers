@@ -119,7 +119,7 @@ public class Damier {
                     return false;
                 }
             } else {
-                //A CODER POUR LES DAMES !!!
+                //A TESTER
                 int size;
                 if (p1.getY() > p2.getY()) {
                     aDroite = false;
@@ -138,50 +138,47 @@ public class Damier {
                 for (int i = 0; i < size; i++) {
                     if (aLavant) {
                         if (aDroite) {
-                            if (lesCases[p1.getX() - size][p1.getY() + size].getPiece() != null
-                                    && (lesCases[p1.getX() - size][p1.getY() + size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())
-                                    || (lesCases[p1.getX() - size][p1.getY() + size].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound)) {
+                            if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null
+                                    && (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur()
+                                    || (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
-                            } else if (lesCases[p1.getX() - size][p1.getY() + size].getPiece() != null
-                                    && (lesCases[p1.getX() - size][p1.getY() + size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                            } else if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null
+                                    && (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         } else {
-                            if (lesCases[p1.getX() - size][p1.getY() - size].getPiece() != null
-                                    && (lesCases[p1.getX() - size][p1.getY() - size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())
-                                    || (lesCases[p1.getX() - size][p1.getY() - size].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound)) {
+                            if (lesCases[p1.getX() - i][p1.getY() - i].getPiece() != null
+                                    && (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur()
+                                    || (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
-                            } else if (lesCases[p1.getX() - size][p1.getY() - size].getPiece() != null
-                                    && (lesCases[p1.getX() - size][p1.getY() - size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                            } else if (lesCases[p1.getX() - i][p1.getY() - i].getPiece() != null
+                                    && (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         }
                     } else {
                         if (aDroite) {
-                            if (lesCases[p1.getX() + size][p1.getY() + size].getPiece() != null
-                                    && (lesCases[p1.getX() + size][p1.getY() + size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())
-                                    || (lesCases[p1.getX() + size][p1.getY() + size].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound)) {
+                            if (lesCases[p1.getX() + i][p1.getY() + i].getPiece() != null
+                                    && (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur()
+                                    || (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
-                            } else if (lesCases[p1.getX() + size][p1.getY() + size].getPiece() != null
-                                    && (lesCases[p1.getX() + size][p1.getY() + size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                            } else if (lesCases[p1.getX() + i][p1.getY() + i].getPiece() != null
+                                    && (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         } else {
-                            if (lesCases[p1.getX() + size][p1.getY() - size].getPiece() != null
-                                    && (lesCases[p1.getX() + size][p1.getY() - size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())
-                                    || (lesCases[p1.getX() + size][p1.getY() - size].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound)) {
+                            if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null
+                                    && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur()
+                                    || (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))){
                                 problemFound = true;
-                            } else if (lesCases[p1.getX() + size][p1.getY() - size].getPiece() != null
-                                    && (lesCases[p1.getX() + size][p1.getY() - size].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                            } else if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null
+                                    && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         }
-
                     }
-
                 }
-
-                return false;
+                return !problemFound;
             }
         } else {
             return false;
@@ -198,21 +195,69 @@ public class Damier {
         }
 
         if (mouvementPossible(p1, p2)) {
-            if ((p1.getX() - p2.getX() > 1 || p1.getX() - p2.getX() < 1)) {
-                if (p2.getY() > p1.getY()) {
-                    eatenPiece = new Position(p1.getX() + value, p1.getY() + 1);
-                    lesCases[p1.getX() + value][p1.getY() + 1].setPiece(null);
-                } else {
-                    eatenPiece = new Position(p1.getX() + value, p1.getY() - 1);
-                    lesCases[p1.getX() + value][p1.getY() - 1].setPiece(null);
-                }
+            if (lesCases[p1.getX()][p1.getY()].getPiece().getType() == Type.Pion) {
+                if (p1.getX() - p2.getX() > 1 || p1.getX() - p2.getX() < 1) {
+                    if (p2.getY() > p1.getY()) {
+                        eatenPiece = new Position(p1.getX() + value, p1.getY() + 1);
+                        lesCases[p1.getX() + value][p1.getY() + 1].setPiece(null);
+                    } else {
+                        eatenPiece = new Position(p1.getX() + value, p1.getY() - 1);
+                        lesCases[p1.getX() + value][p1.getY() - 1].setPiece(null);
+                    }
 
-            }
-            lesCases[p2.getX()][p2.getY()].setPiece(lesCases[p1.getX()][p1.getY()].getPiece());
-            lesCases[p1.getX()][p1.getY()].setPiece(null);
-            if ((p2.getX() == 0 || p2.getX() == lesCases.length - 1) && lesCases[p2.getX()][p2.getY()].getPiece().getType() == Type.Pion) {
-                lesCases[p2.getX()][p2.getY()].getPiece().setType(Type.Dame);
-                System.out.println("I Have a DAME");
+                }
+                lesCases[p2.getX()][p2.getY()].setPiece(lesCases[p1.getX()][p1.getY()].getPiece());
+                lesCases[p1.getX()][p1.getY()].setPiece(null);
+                if ((p2.getX() == 0 || p2.getX() == lesCases.length - 1) && lesCases[p2.getX()][p2.getY()].getPiece().getType() == Type.Pion) {
+                    lesCases[p2.getX()][p2.getY()].getPiece().setType(Type.Dame);
+                    System.out.println("I Have a DAME");
+                }
+            } else {
+                //cabler pour les dames.
+                int size;
+                boolean aDroite, aLavant;
+                if (p1.getY() > p2.getY()) {
+                    aDroite = false;
+                    size = p1.getY() - p2.getY();
+                } else {
+                    aDroite = true;
+                    size = p2.getY() - p1.getY();
+                }
+                if (p1.getX() > p2.getX()) {
+                    aLavant = true;
+                } else {
+                    aLavant = false;
+                }
+                for (int i = 0; i < size; i++) {
+                    if (aLavant) {
+                        if (aDroite) {
+                            if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null) {
+                                eatenPiece = new Position(p1.getX() - i, p1.getY() + i);
+                                lesCases[p1.getX() - i][p1.getY() + i].setPiece(null);
+                            }
+                        } else {
+                            if (lesCases[p1.getX() - i][p1.getY() - i].getPiece() != null) {
+                                eatenPiece = new Position(p1.getX() - i, p1.getY() - i);
+                                lesCases[p1.getX() - i][p1.getY() - i].setPiece(null);
+                            }
+                        }
+                    } else {
+                        if (aDroite) {
+                            
+                            if (lesCases[p1.getX() + i][p1.getY() + i].getPiece() != null) {
+                                eatenPiece = new Position(p1.getX() + i, p1.getY() + i);
+                                lesCases[p1.getX() + i][p1.getY() + i].setPiece(null);
+                            }
+                        } else {
+                            if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null) {
+                                eatenPiece = new Position(p1.getX() + i, p1.getY() - i);
+                                lesCases[p1.getX() + i][p1.getY() - i].setPiece(null);
+                            }
+                        }
+                    }
+                }
+                lesCases[p2.getX()][p2.getY()].setPiece(lesCases[p1.getX()][p1.getY()].getPiece());
+                lesCases[p1.getX()][p1.getY()].setPiece(null);
             }
         }
         return eatenPiece;
