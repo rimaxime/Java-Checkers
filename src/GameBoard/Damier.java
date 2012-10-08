@@ -143,7 +143,7 @@ public class Damier {
                                     || (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
                             } else if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null
-                                    && (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                                    && (lesCases[p1.getX() - i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         } else {
@@ -152,7 +152,7 @@ public class Damier {
                                     || (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
                             } else if (lesCases[p1.getX() - i][p1.getY() - i].getPiece() != null
-                                    && (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                                    && (lesCases[p1.getX() - i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         }
@@ -163,7 +163,7 @@ public class Damier {
                                     || (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
                             } else if (lesCases[p1.getX() + i][p1.getY() + i].getPiece() != null
-                                    && (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                                    && (lesCases[p1.getX() + i][p1.getY() + i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         } else {
@@ -172,7 +172,7 @@ public class Damier {
                                     || (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))){
                                 problemFound = true;
                             } else if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null
-                                    && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
+                                    && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
                                 oppositeColorFound = true;
                             }
                         }
