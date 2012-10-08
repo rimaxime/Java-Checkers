@@ -148,7 +148,8 @@ public class DisplayGamePanel extends JPanel{
             selectedCase = parent.currentGameboard.getCase(posY, posX);
         }
         if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()) &&
-                previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer())
+                previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer() && (listePositions.size() == 0 || 
+                previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == 2 || previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == -2))
         {
             System.out.println("On bouge");
             Position p = parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
@@ -159,7 +160,7 @@ public class DisplayGamePanel extends JPanel{
             //gerer une liste des cases prises lors de ce mouvement. -- nécéssaire de garder cette liste affichée.
             //envoyer la liste en parametres
             //récupérer la possibilité ou non de faire un mouvement de plus.
-            if(!eatenPiece() || !parent.currentGameboard.oneMoreMouvementPossible(selectedCase,listePositions,gameControl.getCurrentPlayer())){
+            if(!eatenPiece() || (eatenPiece() && !parent.currentGameboard.oneMoreMouvementPossible(selectedCase,listePositions,gameControl.getCurrentPlayer()))){
                 listePositions.clear();
                 if(gameControl.getCurrentPlayer() == Couleur.White){
                     gameControl.setCurrentPlayer(Couleur.Black);   
@@ -175,6 +176,10 @@ public class DisplayGamePanel extends JPanel{
             }
                 
         }
+        else if(eatenPiece())
+        {
+            selectedCase = previousSelectedCase;
+        }
         if(gameControl.detectWinner() != Winner.No)
         {
             parent.activePlayer.setText(gameControl.detectWinner() + " Won !!! ");
@@ -188,7 +193,7 @@ public class DisplayGamePanel extends JPanel{
             System.out.println("EatenPiece");
             return true;
         }*/
-        if(listePositions != null) {
+        if(listePositions.size() > 0) {
             return true;
         }
         else {

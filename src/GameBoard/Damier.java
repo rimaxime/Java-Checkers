@@ -135,7 +135,8 @@ public class Damier {
                 }
                 boolean oppositeColorFound = false;
                 boolean problemFound = false;
-                for (int i = 0; i < size; i++) {
+                for (int i = 1; i <= size; i++) {
+                    System.out.println("p1.getX = " + p1.getX() + "p1.getY = " + p1.getY()+ "p2.getX = " + p2.getX() + "p2.getY = " + p2.getY());
                     if (aLavant) {
                         if (aDroite) {
                             if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null
@@ -178,6 +179,7 @@ public class Damier {
                         }
                     }
                 }
+                System.out.println(problemFound);
                 return !problemFound;
             }
         } else {
@@ -196,7 +198,7 @@ public class Damier {
 
         if (mouvementPossible(p1, p2)) {
             if (lesCases[p1.getX()][p1.getY()].getPiece().getType() == Type.Pion) {
-                if (p1.getX() - p2.getX() > 1 || p1.getX() - p2.getX() < 1) {
+                if ((p1.getX() - p2.getX()) == 2 || (p1.getX() - p2.getX()) == -2) {
                     if (p2.getY() > p1.getY()) {
                         eatenPiece = new Position(p1.getX() + value, p1.getY() + 1);
                         lesCases[p1.getX() + value][p1.getY() + 1].setPiece(null);
@@ -228,7 +230,7 @@ public class Damier {
                 } else {
                     aLavant = false;
                 }
-                for (int i = 0; i < size; i++) {
+                for (int i = 1; i <= size; i++) {
                     if (aLavant) {
                         if (aDroite) {
                             if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null) {
@@ -275,8 +277,14 @@ public class Damier {
      */
     public boolean oneMoreMouvementPossible(Case selectedCase, ArrayList<Position> listePositions, Couleur currentColor) {
         boolean return_state = false;
+        System.out.println(selectedCase.getPiece().getCouleur());
         switch (selectedCase.getPiece().getType()) {
             case Dame:
+                if (DameMoreMouvementPossible(selectedCase, listePositions, currentColor)) {
+                    return_state = true;
+                } else {
+                    System.out.println("Not more pieces eaten");
+                }
                 break;
             case Pion:
                 if (PionMoreMouvementPossible(selectedCase, listePositions, currentColor)) {
@@ -348,5 +356,11 @@ public class Damier {
             }
         }
         return return_state;
+    }
+
+    private boolean DameMoreMouvementPossible(Case selectedCase, ArrayList<Position> listePositions, Couleur currentColor) {
+        //parser dans les 4 directions jusqu'a rencontrer une piece / vérifier si on peut la manger sinon false
+        // vérifier que l'on est pas bloqué par une autre piece.
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
