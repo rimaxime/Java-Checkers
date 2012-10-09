@@ -136,7 +136,7 @@ public class Damier {
                 boolean oppositeColorFound = false;
                 boolean problemFound = false;
                 for (int i = 1; i <= size; i++) {
-                    System.out.println("p1.getX = " + p1.getX() + "p1.getY = " + p1.getY()+ "p2.getX = " + p2.getX() + "p2.getY = " + p2.getY());
+                    System.out.println("p1.getX = " + p1.getX() + "p1.getY = " + p1.getY() + "p2.getX = " + p2.getX() + "p2.getY = " + p2.getY());
                     if (aLavant) {
                         if (aDroite) {
                             if (lesCases[p1.getX() - i][p1.getY() + i].getPiece() != null
@@ -170,7 +170,7 @@ public class Damier {
                         } else {
                             if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null
                                     && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() == lesCases[p1.getX()][p1.getY()].getPiece().getCouleur()
-                                    || (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))){
+                                    || (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur() && oppositeColorFound))) {
                                 problemFound = true;
                             } else if (lesCases[p1.getX() + i][p1.getY() - i].getPiece() != null
                                     && (lesCases[p1.getX() + i][p1.getY() - i].getPiece().getCouleur() != lesCases[p1.getX()][p1.getY()].getPiece().getCouleur())) {
@@ -245,7 +245,7 @@ public class Damier {
                         }
                     } else {
                         if (aDroite) {
-                            
+
                             if (lesCases[p1.getX() + i][p1.getY() + i].getPiece() != null) {
                                 eatenPiece = new Position(p1.getX() + i, p1.getY() + i);
                                 lesCases[p1.getX() + i][p1.getY() + i].setPiece(null);
@@ -361,6 +361,68 @@ public class Damier {
     private boolean DameMoreMouvementPossible(Case selectedCase, ArrayList<Position> listePositions, Couleur currentColor) {
         //parser dans les 4 directions jusqu'a rencontrer une piece / vérifier si on peut la manger sinon false
         // vérifier que l'on est pas bloqué par une autre piece.
-        throw new UnsupportedOperationException("Not yet implemented");
+        int i = 1;
+        boolean possible = true;
+        boolean eatenPiece = false;
+        int x = selectedCase.getPosition().getX();
+        int y = selectedCase.getPosition().getY();
+        while (!eatenPiece && possible && ((selectedCase.getPosition().getX() + i < taille) || (selectedCase.getPosition().getY() + i < taille) || (selectedCase.getPosition().getX() - i >= 0)
+                || (selectedCase.getPosition().getY() - i >= 0))) {
+            if (x + i < taille && y + i < taille) {
+                if (lesCases[x + i][y + i].getPiece() != null) {
+                    if (lesCases[x + i][y + i].getPiece().getCouleur() == selectedCase.getPiece().getCouleur()) {
+                        possible = false;
+                    } else if ((x + i + 1 >= taille || y + i + 1 >= taille) || lesCases[x + i + 1][y + i + 1].getPiece() != null) {
+                        possible = false;
+                    }
+                    else
+                        eatenPiece = true;
+                }
+            }
+            if (x - i >= 0 && y + i < taille) {
+                if (lesCases[x - i][y + i].getPiece() != null && !possible) {
+                    if (lesCases[x - i][y + i].getPiece().getCouleur() == selectedCase.getPiece().getCouleur()) {
+                        possible = false;
+                    } else if ((x - i - 1 < 0 || y + i + 1 >= taille) || lesCases[x - i - 1][y + i + 1].getPiece() != null) {
+                        possible = false;
+                    } else {
+                        possible = true;
+                        eatenPiece = true;
+                    }
+                } else {
+                    possible = true;
+                }
+            }
+            if (x + i < taille && y - i >= 0) {
+                if (lesCases[x + i][y - i].getPiece() != null && !possible) {
+                    if (lesCases[x + i][y - i].getPiece().getCouleur() == selectedCase.getPiece().getCouleur()) {
+                        possible = false;
+                    } else if ((x + i + 1 >= taille || y - i - 1 < 0) || lesCases[x + i + 1][y - i - 1].getPiece() != null) {
+                        possible = false;
+                    } else {
+                        possible = true;
+                        eatenPiece = true;
+                    }
+                } else {
+                    possible = true;
+                }
+            }
+            if (x - i >= 0 && y - i >= 0) {
+                if (lesCases[x - i][y - i].getPiece() != null && !possible) {
+                    if (lesCases[x - i][y - i].getPiece().getCouleur() == selectedCase.getPiece().getCouleur()) {
+                        possible = false;
+                    } else if ((x - i - 1 < 0 || y - i - 1 < 0) || lesCases[x - i - 1][y - i - 1].getPiece() != null) {
+                        possible = false;
+                    } else {
+                        possible = true;
+                        eatenPiece = true;
+                    }
+                } else {
+                    possible = true;
+                }
+            }
+            i++;
+        }
+        return eatenPiece;
     }
 }

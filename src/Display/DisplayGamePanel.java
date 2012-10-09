@@ -149,12 +149,18 @@ public class DisplayGamePanel extends JPanel{
         }
         if(previousSelectedCase != null && parent.currentGameboard.mouvementPossible(previousSelectedCase.getPosition(), selectedCase.getPosition()) &&
                 previousSelectedCase.getPiece().getCouleur() == gameControl.getCurrentPlayer() && (listePositions.size() == 0 || 
-                previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == 2 || previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() == -2))
+                previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() >= 2 || previousSelectedCase.getPosition().getX() - selectedCase.getPosition().getX() <= -2))
         {
             System.out.println("On bouge");
             Position p = parent.currentGameboard.mouvement(previousSelectedCase.getPosition(), selectedCase.getPosition());
             if (p!= null) {
                 listePositions.add(p);
+            }
+            else if(eatenPiece() && p == null)
+            {
+                previousSelectedCase.setPiece(selectedCase.getPiece());
+                selectedCase.setPiece(null);
+                selectedCase = previousSelectedCase;
             }
                     
             //gerer une liste des cases prises lors de ce mouvement. -- nécéssaire de garder cette liste affichée.
